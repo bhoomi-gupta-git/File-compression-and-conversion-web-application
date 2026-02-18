@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Compressing: <span id="outname">{{ output_name }}</span></h2>
+
+    <div style="border:1px solid #ddd; width:100%; height:26px; border-radius:4px; overflow:hidden; background:#f1f1f1;">
+        <div id="progressBar" style="height:100%; width:0%; background:#4caf50;"></div>
+    </div>
+    <p>
+        <strong>Status:</strong> <span id="status">starting</span><br>
+        <strong>Percent:</strong> <span id="percent">0</span>% |
+        <strong>Frame:</strong> <span id="frame">-</span> |
+        <strong>FPS:</strong> <span id="fps">-</span> |
+        <strong>Bitrate:</strong> <span id="bitrate">-</span> |
+        <strong>Speed:</strong> <span id="speed">-</span> |
+        <strong>Time:</strong> <span id="time">00:00:00</span> |
+        <strong>ETA:</strong> <span id="eta">-</span>
+    </p>
+
+    <div id="download-wrap" style="display:none; margin-top:10px;">
+        <a id="download-link" href="#" class="btn">Download compressed video</a>
+    </div>
+</div>
+
+<script>
+    const JOB_ID = "{{ job_id }}";
+    const POLL_INTERVAL = 800; // ms
+    const progressBar = document.getElementById("progressBar");
+    const statusEl = document.getElementById("status");
+    const percentEl = document.getElementById("percent");
+    const frameEl = document.getElementById("frame");
+    const fpsEl = document.getElementById("fps");
+    const bitrateEl = document.getElementById("bitrate");
+    const speedEl = document.getElementById("speed");
+    const timeEl = document.getElementById("time");
+    const etaEl = document.getElementById("eta");
+    const downloadWrap = document.getElementById("download-wrap");
+    const downloadLink = document.getElementById("download-link");
+
+    function secondsToHMS(sec) {
+        if (!sec && sec !== 0) return "-";
+        sec = Number(sec);
+        if (sec < 0) return "-";
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        const s = Math.floor(sec % 60);
+        return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+
+    async function poll() {
+        try {
+            const res = await fetch(`/video_progress?job_id=${JOB_ID}`);
+            if (res.status === 404) {
+                statusEl.textContent = "starting";
+                setTimeout(poll, POLL_INTERVAL);
+                return;
+            }
+            const data = await res.json();
+            statusEl.textContent = data.status || "-";
+            percentEl.textContent = data.percent !== undefined ? data.percent : 0;
+            progressBar.style.width = (data.percent || 0) + "%";
+            frameEl.textContent = data.frame || "-";
+            fpsEl.textContent = data.fps || "-";
+            bitrateEl.textContent = data.bitrate || "-";
+            speedEl.textContent = data.speed || "-";
+            timeEl.textContent = data.time || "-";
+
+            if (data.eta_seconds) {
+                etaEl.textContent = secondsToHMS(data.eta_seconds);
+            } else {
+                etaEl.textContent = "-";
+            }
+
+            if (data.status === "done") {
+                // show download link
+                downloadWrap.style.display = "block";
+                if (data.download_url) {
+                    downloadLink.href = data.download_url;
+                    downloadLink.textContent = "Download compressed video";
+                } else {
+                    downloadLink.textContent = "Download (file ready)";
+                }
+                progressBar.style.width = "100%";
+                percentEl.textContent = 100;
+                statusEl.textContent = "done";
+                return; // stop polling
+            } else if (data.status === "failed" || data.status === "error") {
+                statusEl.textContent = data.status + (data.error ? (": " + data.error) : "");
+                progressBar.style.background = "red";
+                return;
+            }
+
+            // still running
+            setTimeout(poll, POLL_INTERVAL);
+        } catch (err) {
+            console.error("poll error", err);
+            setTimeout(poll, POLL_INTERVAL);
+        }
+    }
+
+    // start polling
+    poll();
+</script>
+{% endblock %}

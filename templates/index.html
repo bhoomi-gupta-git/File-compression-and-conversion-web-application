@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="page-title">Quick Tools</h1>
+<p class="page-subtitle">Choose a category to get started.</p>
+
+<div class="tool-grid">
+
+    <!-- Conversion Section -->
+    <!-- <a class="tool-item" href="{{ url_for('conversion_tools') }}">
+        <div class="tool-icon">🔄</div>
+        <div class="tool-title">Convert Files</div>
+        <div class="tool-desc">Convert PDFs, documents, sheets & text</div>
+    </a>  -->
+
+    <!-- Compression Section -->
+    <a class="tool-item" href="{{ url_for('compression_tools') }}">
+        <div class="tool-icon">🗜️</div>
+        <div class="tool-title">Compress Files</div>
+        <div class="tool-desc">Compress images, PDFs, videos & Office files</div>
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Image Compression</h2>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select Image (JPG, JPEG, PNG):</label><br>
+        <input type="file" name="file" accept="image/*" required><br><br>
+
+        <label>Quality (1–95):</label><br>
+        <input type="range" name="quality" min="1" max="95" value="75" id="qualitySlider">
+        <span id="qualityValue">75</span><br><br>
+
+        <button type="submit">Compress</button>
+    </form>
+</div>
+
+<script>
+    const slider = document.getElementById("qualitySlider");
+    const output = document.getElementById("qualityValue");
+    output.textContent = slider.value;
+
+    slider.oninput = function () {
+        output.textContent = this.value;
+    }
+</script>
+
+{% endblock %}

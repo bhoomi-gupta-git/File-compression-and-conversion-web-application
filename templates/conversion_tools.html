@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="page-title">Conversion Tools</h1>
+<p class="page-subtitle">Convert documents between formats — fast & accurate.</p>
+
+<div class="tool-grid">
+
+    <a class="tool-item" href="{{ url_for('pdf_to_word') }}">
+        <div class="tool-icon">📄➡️📝</div>
+        <div class="tool-title">PDF → Word</div>
+        <div class="tool-desc">Convert PDF to editable DOCX</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('pdf_to_excel') }}">
+        <div class="tool-icon">📄➡️📊</div>
+        <div class="tool-title">PDF → Excel</div>
+        <div class="tool-desc">Extract tables into spreadsheets</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('pdf_to_csv') }}">
+        <div class="tool-icon">📄➡️📑</div>
+        <div class="tool-title">PDF → CSV</div>
+        <div class="tool-desc">Extract rows into a CSV file</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('pdf_to_txt') }}">
+        <div class="tool-icon">📄➡️🔤</div>
+        <div class="tool-title">PDF → Text</div>
+        <div class="tool-desc">Extract plain text from PDFs</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('txt_to_pdf') }}">
+        <div class="tool-icon">🔤➡️📄</div>
+        <div class="tool-title">Text → PDF</div>
+        <div class="tool-desc">Convert text files into PDF format</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('word_to_pdf') }}">
+        <div class="tool-icon">📝➡️📄</div>
+        <div class="tool-title">Word → PDF</div>
+        <div class="tool-desc">Convert DOC/DOCX into PDF</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('excel_to_pdf') }}">
+        <div class="tool-icon">📊➡️📄</div>
+        <div class="tool-title">Excel → PDF</div>
+        <div class="tool-desc">Export worksheets to PDF</div>
+    </a>
+
+</div>
+
+{% endblock %}

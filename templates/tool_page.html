@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="toolshell" style="display:flex; gap:32px; margin-top:20px;">
+
+  <!-- MAIN PANEL -->
+  <div class="mainpanel" style="flex:1;">
+
+    <h2 style="margin:0; font-size:26px; font-weight:700;">{{ title }}</h2>
+    <p class="muted" style="margin-top:6px; color:var(--text-light);">{{ subtitle }}</p>
+
+    <!-- ERROR -->
+    {% if error %}
+      <div class="alert" 
+           style="background:#ffecec; padding:14px; border-radius:var(--radius);
+                  color:#b00020; border:1px solid #f7c4c4; margin-top:18px;">
+        {{ error }}
+      </div>
+    {% endif %}
+
+    <!-- FORM -->
+    <form method="POST" enctype="multipart/form-data" 
+          style="background:var(--card); padding:24px; border-radius:var(--radius);
+                 border:1px solid var(--border); margin-top:20px; box-shadow:var(--shadow);">
+
+      <label style="font-weight:600;">Choose File</label>
+      <input type="file" name="file" class="input" required
+             style="margin-top:8px; padding:12px; border-radius:var(--radius);
+                    border:1px solid var(--border); background:var(--bg); width:100%;">
+
+
+      <!-- QUALITY SLIDER (OPTIONAL) -->
+      {% if show_quality %}
+      <div style="margin-top:18px;">
+        <label style="font-weight:600;">Quality</label>
+        <input type="range" 
+               name="quality"
+               min="{{ quality_min }}"
+               max="{{ quality_max }}"
+               value="{{ quality_default }}"
+               id="qualitySlider"
+               style="width:100%; margin-top:8px;">
+        <div class="kv" 
+             style="display:flex; justify-content:space-between; margin-top:4px;
+                    color:var(--text-light);">
+          <span>Adjust quality</span>
+          <span id="qualityVal">{{ quality_default }}</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- EXTRA OPTIONS (EXCEL ONLY OR CUSTOM) -->
+      {% if extra_options %}
+        {{ extra_options|safe }}
+      {% endif %}
+
+      <button class="btn" type="submit" 
+              style="margin-top:20px; padding:12px 20px; font-weight:600;">
+        Convert / Compress
+      </button>
+    </form>
+
+  </div>
+
+  SIDE PANEL
+  <aside class="sidepanel" 
+         style="width:260px; background:var(--card); padding:24px; 
+                border-radius:var(--radius); border:1px solid var(--border);
+                height:max-content; box-shadow:var(--shadow);">
+
+    <h4 style="margin:0; font-size:18px;">Status</h4>
+    <p class="muted" style="margin-top:8px; color:var(--text-light);">
+      Tool information, supported formats, and tips.
+    </p>
+
+    <hr style="margin:16px 0; border:none; border-top:1px solid rgba(0,0,0,0.08)">
+
+    <div>
+      <strong>Accepted Formats:</strong>
+      <div class="muted" style="margin-top:8px; color:var(--text-light);">
+        {{ accepted_formats or 'PDF, DOCX, PPTX, XLSX, JPG, PNG' }}
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <strong>Tip</strong>
+      <div class="muted" style="margin-top:6px; color:var(--text-light);">
+        {{ tip or 'Use moderate quality for best size-to-clarity balance.' }}
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- QUALITY JS -->
+<script>
+  const slider = document.getElementById('qualitySlider');
+  if (slider) {
+    const output = document.getElementById('qualityVal');
+    output.textContent = slider.value;
+    slider.oninput = function() {
+      output.textContent = this.value;
+    };
+  }
+</script>
+
+{% endblock %}

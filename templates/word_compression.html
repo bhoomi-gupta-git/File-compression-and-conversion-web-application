@@ -1,0 +1,31 @@
+<!-- word_compression.html -->
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+<h2>Compress Word (.docx)</h2>
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+
+
+<form method="POST" enctype="multipart/form-data">
+<label>Select DOCX File:</label>
+<input type="file" name="file" accept=".docx" required>
+
+
+<label style="margin-top:16px; display:block;">Image Quality (10-95)</label>
+<input type="range" name="quality" min="10" max="95" value="70" id="wq">
+<span id="wq_val">70</span>
+
+
+<label style="margin-top:16px; display:block;">Max Image Width</label>
+<input type="number" name="maxwidth" value="1600">
+
+
+<button type="submit" style="margin-top:20px;">Compress</button>
+</form>
+</div>
+<script>
+const wq=document.getElementById("wq");
+const wqv=document.getElementById("wq_val");
+wq.oninput=()=>wqv.textContent=wq.value;
+</script>
+{% endblock %}

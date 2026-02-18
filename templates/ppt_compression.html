@@ -1,0 +1,31 @@
+<!-- ppt_compression.html -->
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+<h2>Compress PowerPoint (.pptx)</h2>
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+
+
+<form method="POST" enctype="multipart/form-data">
+<label>Select PPTX File:</label>
+<input type="file" name="file" accept=".pptx" required>
+
+
+<label style="margin-top:16px; display:block;">Image Quality (10-95)</label>
+<input type="range" name="quality" min="10" max="95" value="70" id="pq">
+<span id="pq_val">70</span>
+
+
+<label style="margin-top:16px; display:block;">Max Image Width</label>
+<input type="number" name="maxwidth" value="1600">
+
+
+<button type="submit" style="margin-top:20px;">Compress</button>
+</form>
+</div>
+<script>
+const pq=document.getElementById("pq");
+const pqv=document.getElementById("pq_val");
+pq.oninput=()=>pqv.textContent=pq.value;
+</script>
+{% endblock %}

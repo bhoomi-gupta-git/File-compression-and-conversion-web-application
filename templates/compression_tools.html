@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1 class="page-title">Compression Tools</h1>
+<p class="page-subtitle">Compress images, PDFs, Office files & videos.</p>
+
+<div class="tool-grid">
+
+    <a class="tool-item" href="{{ url_for('image_compression') }}">
+        <div class="tool-icon">🖼️⬇️</div>
+        <div class="tool-title">Image Compression</div>
+        <div class="tool-desc">Compress JPG/PNG with quality slider</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('video_compression') }}">
+        <div class="tool-icon">🎥⬇️</div>
+        <div class="tool-title">Video Compression</div>
+        <div class="tool-desc">Reduce MP4/MOV size using FFmpeg</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('compress_pdf') }}">
+        <div class="tool-icon">📄🗜️</div>
+        <div class="tool-title">Compress PDF</div>
+        <div class="tool-desc">Reduce PDF size (Ghostscript)</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('compress_word_route') }}">
+        <div class="tool-icon">📘</div>
+        <div class="tool-title">Word Compression</div>
+        <div class="tool-desc">Optimize DOCX by reducing images & metadata</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('compress_excel_route') }}">
+        <div class="tool-icon">📊</div>
+        <div class="tool-title">Excel Compression</div>
+        <div class="tool-desc">Flatten formulas & compress embedded images</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('compress_ppt_route') }}">
+        <div class="tool-icon">📽️</div>
+        <div class="tool-title">PPT Compression</div>
+        <div class="tool-desc">Shrink images & remove thumbnails</div>
+    </a>
+
+    <a class="tool-item" href="{{ url_for('create_zip') }}">
+        <div class="tool-icon">📦🗜️</div>
+        <div class="tool-title">Create ZIP</div>
+        <div class="tool-desc">Bundle multiple files into ZIP</div>
+    </a>
+
+</div>
+
+{% endblock %}

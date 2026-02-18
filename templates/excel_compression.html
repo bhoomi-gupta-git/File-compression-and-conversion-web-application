@@ -1,0 +1,35 @@
+<!-- excel_compression.html -->
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+<h2>Compress Excel (.xlsx)</h2>
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+
+
+<form method="POST" enctype="multipart/form-data">
+<label>Select XLSX File:</label>
+<input type="file" name="file" accept=".xlsx" required>
+
+
+<label style="margin-top:16px; display:block;">Image Quality (10-95)</label>
+<input type="range" name="quality" min="10" max="95" value="70" id="eq">
+<span id="eq_val">70</span>
+
+
+<label style="margin-top:16px; display:block;">Max Image Width</label>
+<input type="number" name="maxwidth" value="1600">
+
+
+<label style="margin-top:16px; display:block;">Flatten Formulas</label>
+<input type="checkbox" name="flatten" checked>
+
+
+<button type="submit" style="margin-top:20px;">Compress</button>
+</form>
+</div>
+<script>
+const eq=document.getElementById("eq");
+const eqv=document.getElementById("eq_val");
+eq.oninput=()=>eqv.textContent=eq.value;
+</script>
+{% endblock %}

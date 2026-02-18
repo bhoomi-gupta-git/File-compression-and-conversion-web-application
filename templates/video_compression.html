@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Video Compression</h2>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select Video:</label><br>
+        <input type="file" name="file" accept="video/*" required><br><br>
+
+        <label>Compression Quality (1–100%):</label><br>
+        <input type="range" name="quality" min="1" max="100" value="70" id="qualitySlider">
+        <span id="qualityValue">70%</span><br><br>
+
+        <button type="submit">Compress</button>
+    </form>
+</div>
+
+<script>
+    const slider = document.getElementById("qualitySlider");
+    const label = document.getElementById("qualityValue");
+
+    slider.oninput = function () {
+        label.textContent = this.value + "%";
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>File Compression</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+
+      <div class="brand">
+        <div class="logo">FC</div>
+        <div class="brand-text">
+          <div class="title">File Compression</div>
+          <div class="subtitle">Convert • Compress • Export</div>
+        </div>
+      </div>
+
+      <nav class="topnav">
+        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+        <!-- <a class="nav-link" href="{{ url_for('conversion_tools') }}">Convert</a> -->
+
+        <!-- Compression Menu -->
+        <a class="nav-link" href="{{ url_for('compression_tools') }}">Compress</a>
+        
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container" style="padding-top:30px;">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:60px; padding:20px 0; text-align:center; color:var(--text-light); font-size:14px;">
+    © 2025 File Compression • Built with Flask<br>
+    Made by Bhoomi
+  </footer>
+
+</body>
+</html>

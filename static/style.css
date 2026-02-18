@@ -1,0 +1,290 @@
+/* ============================================================
+   GLOBAL STYLE — Clean Minimal UI + Dark/Light Theme 
+   ============================================================ */
+
+:root {
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #1c1c1c;
+    --text-light: #555;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --border: #e4e4e7;
+    --radius: 14px;
+    --shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* ===== DARK MODE ===== */
+html[data-theme='dark'] {
+    --bg: #121212;
+    --card: #1c1c1e;
+    --text: #ffffff;
+    --text-light: #cccccc;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --border: #2d2d2f;
+    --shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   HEADER / TOP BAR
+   ============================================================ */
+.topbar {
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.75);
+    border-bottom: 1px solid var(--border);
+    z-index: 20;
+}
+
+html[data-theme='dark'] .topbar {
+    background: rgba(20,20,20,0.7);
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    background: var(--accent);
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-text .title {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.brand-text .subtitle {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.topnav {
+    display: flex;
+    gap: 18px;
+}
+
+.nav-link {
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+
+/* ============================================================
+   BUTTONS 
+   ============================================================ */
+button, .btn, input[type="submit"] {
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover, .btn:hover, input[type="submit"]:hover {
+    background: var(--accent-hover);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.btn-ghost:hover {
+    background: var(--border);
+}
+
+
+/* ============================================================
+   PAGE TITLES / SUBTITLES
+   ============================================================ */
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.page-subtitle {
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+
+/* ============================================================
+   TOOL CARDS (HOME PAGE GRID)
+   ============================================================ */
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    margin-top: 30px;
+}
+
+/* unified final tool-item style */
+.tool-item {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    padding: 28px;
+    border-radius: var(--radius);
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: 0.2s ease;
+}
+
+.tool-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+}
+
+.tool-icon {
+    font-size: 42px;
+    margin-bottom: 14px;
+}
+
+.tool-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.tool-desc {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+form {
+    background: var(--card);
+    padding: 26px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+}
+
+label {
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+}
+
+input:focus {
+    outline: 2px solid var(--accent);
+}
+
+input[type=range] {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+.alerts {
+    margin-bottom: 18px;
+}
+
+.alert {
+    background: #fee2e2;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    margin-top: 50px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+    text-align: center;
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   RESPONSIVE (Mobile)
+   ============================================================ */
+@media (max-width: 700px) {
+    .topnav {
+        display: none;
+    }
+}
